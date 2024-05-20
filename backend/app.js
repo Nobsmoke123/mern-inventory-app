@@ -2,14 +2,39 @@ const dotenv = require('dotenv');
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/connectDB');
+const helmet = require('helmet');
+const compression = require('compression');
+const morgan = require('morgan');
+const catch404Error = require('./middleware/catch_404_error');
+const errorHandler = require('./middleware/custom_error_handler');
+const userRoutes = require('./routes/user.route.');
 
 dotenv.config();
 
 const app = new express();
 
+// Remove fingerprinting
+app.disable('x-powered-by');
+
+app.use(helmet());
+app.use(compression());
+app.use(morgan('tiny'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+
+// Load routes
+app.get('/', (req, res) => {
+  throw new Error('Broken');
+});
+
+app.use('/api/users', userRoutes);
+
+// Load 404 error handler
+app.use(catch404Error);
+
+// Load custom error handler
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 
