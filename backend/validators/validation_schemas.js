@@ -16,7 +16,13 @@ const loginSchema = joi.object({
   password: joi.string().alphanum().required(),
 });
 
+const updatePasswordSchema = joi.object({
+  old_password: joi.string().required(),
+  new_password: joi.string().required(),
+});
+
 module.exports = {
   signupSchema,
   loginSchema,
+  updatePasswordSchema,
 };

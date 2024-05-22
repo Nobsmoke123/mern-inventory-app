@@ -11,4 +11,16 @@ router.get(
   asyncWrapper(userController.getUser)
 );
 
+router.patch(
+  '/profile',
+  checkRequestAuthentication,
+  asyncWrapper(userController.updateUser)
+);
+
+router.patch(
+  '/password-update',
+  checkRequestAuthentication,
+  asyncWrapper(userController.updatePassword)
+);
+
 module.exports = router;

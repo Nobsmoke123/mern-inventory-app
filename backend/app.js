@@ -8,7 +8,7 @@ const compression = require('compression');
 const morgan = require('morgan');
 const catch404Error = require('./middleware/catch_404_error');
 const errorHandler = require('./middleware/custom_error_handler');
-const authRoutes = require('./routes/auth.route.');
+const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 
 dotenv.config();
