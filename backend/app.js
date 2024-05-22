@@ -3,11 +3,13 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/connectDB');
 const helmet = require('helmet');
+const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const morgan = require('morgan');
 const catch404Error = require('./middleware/catch_404_error');
 const errorHandler = require('./middleware/custom_error_handler');
-const userRoutes = require('./routes/user.route.');
+const authRoutes = require('./routes/auth.route.');
+const userRoutes = require('./routes/user.routes');
 
 dotenv.config();
 
@@ -20,6 +22,7 @@ app.use(helmet());
 app.use(compression());
 app.use(morgan('tiny'));
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
@@ -28,6 +31,7 @@ app.get('/', (req, res) => {
   throw new Error('Broken');
 });
 
+app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 
 // Load 404 error handler
