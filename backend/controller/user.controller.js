@@ -1,33 +1,22 @@
 const UserModel = require('./../model/user.model');
-const signUpValidator = require('./../validators/signup_validation_schema');
 
 class UserController {
-  async signUp(req, res, next) {
-    await signUpValidator.validateAsync(req.body);
-    const { name, email, password } = req.body;
-    const foundUser = await UserModel.findOne({ email });
+  async getUser(req, res) {
+    const userId = req.user._id;
 
-    if (foundUser) {
-      return res.status(400).json({
-        status: 400,
-        message: `User with email '${email}' already exists.`,
+    const user = await UserModel.findOne({ _id: userId }).select('-password');
+
+    if (!user) {
+      return res.status(401).json({
+        user: null,
       });
     }
 
-    const newUser = await UserModel.create({
-      name,
-      email,
-      password,
-    });
-
-    return res.status(201).json({
-      message: 'User created successfully',
-      status: 201,
-      user: newUser,
+    return res.status(200).json({
+      msg: 'User profile',
+      user,
     });
   }
-
-  async signIn(req, res, next) {}
 }
 
 module.exports = new UserController();
