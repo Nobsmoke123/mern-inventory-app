@@ -1,5 +1,5 @@
 {
   "dependencies": {
-    "nodemailer": "^6.9.13"
+    "cloudinary": "^2.2.0"
   }
 }
