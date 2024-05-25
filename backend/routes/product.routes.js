@@ -25,4 +25,17 @@ router.get(
   asyncWrapper(productController.listProducts)
 );
 
+router.patch(
+  '/:productId',
+  checkRequestAuthentication,
+  fileUploadErrorCatcher,
+  asyncWrapper(productController.updateProduct)
+);
+
+router.delete(
+  '/:productId',
+  checkRequestAuthentication,
+  asyncWrapper(productController.deleteProduct)
+);
+
 module.exports = router;

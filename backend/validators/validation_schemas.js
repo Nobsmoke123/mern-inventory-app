@@ -29,10 +29,32 @@ const resetPasswordSchema = joi.object({
   password: joi.string().required(),
 });
 
+const createProductValidationSchema = joi.object({
+  name: joi.string().required(),
+  sku: joi.string().required(),
+  category: joi.string().required(),
+  quantity: joi.number().required(),
+  price: joi.number().required(),
+  description: joi.string().required(),
+  image: joi.allow(),
+});
+
+const updateProductValidationSchema = joi.object({
+  name: joi.string(),
+  sku: joi.string(),
+  category: joi.string(),
+  quantity: joi.number(),
+  price: joi.number(),
+  description: joi.string(),
+  image: joi.allow(),
+});
+
 module.exports = {
   signupSchema,
   loginSchema,
   updatePasswordSchema,
   forgotPasswordSchema,
   resetPasswordSchema,
+  createProductValidationSchema,
+  updateProductValidationSchema,
 };

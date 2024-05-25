@@ -10,7 +10,8 @@ const catch404Error = require('./middleware/catch_404_error');
 const errorHandler = require('./middleware/custom_error_handler');
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
-
+const productRoutes = require('./routes/product.routes');
+const path = require('path');
 dotenv.config();
 
 const app = new express();
@@ -25,6 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Load routes
 app.get('/', (req, res) => {
@@ -33,6 +35,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/products', productRoutes);
 
 // Load 404 error handler
 app.use(catch404Error);
