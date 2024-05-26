@@ -2,6 +2,15 @@ const jwt = require('../utility/generate_jwt_token');
 const UserModel = require('../model/user.model');
 const validator = require('../validators/validation_schemas');
 const validatePassword = require('../utility/validate_password');
+const Token = require('../model/token.model');
+const sendEmail = require('./../utility/email_util');
+
+const {
+  forgotPasswordSchema,
+  resetPasswordSchema,
+} = require('../validators/validation_schemas');
+
+const crypto = require('crypto');
 
 class AuthController {
   async signUp(req, res) {

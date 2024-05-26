@@ -1,18 +1,8 @@
-const Token = require('../model/token.model');
-
-const {
-  updatePasswordSchema,
-  forgotPasswordSchema,
-  resetPasswordSchema,
-} = require('../validators/validation_schemas');
-
 const UserModel = require('./../model/user.model');
 
 const bcrypt = require('bcrypt');
 
-const crypto = require('crypto');
-
-const sendEmail = require('./../utility/email_util');
+const { updatePasswordSchema } = require('../validators/validation_schemas');
 
 class UserController {
   async getUser(req, res) {
