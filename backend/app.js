@@ -11,6 +11,7 @@ const errorHandler = require('./middleware/custom_error_handler');
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 const productRoutes = require('./routes/product.routes');
+const contactRoutes = require('./routes/contact.routes');
 const path = require('path');
 dotenv.config();
 
@@ -36,6 +37,7 @@ app.get('/', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/app', contactRoutes);
 
 // Load 404 error handler
 app.use(catch404Error);

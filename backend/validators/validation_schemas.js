@@ -49,6 +49,11 @@ const updateProductValidationSchema = joi.object({
   image: joi.allow(),
 });
 
+const contactValidationSchema = joi.object({
+  subject: joi.string().required(),
+  message: joi.string().required(),
+});
+
 module.exports = {
   signupSchema,
   loginSchema,
@@ -57,4 +62,5 @@ module.exports = {
   resetPasswordSchema,
   createProductValidationSchema,
   updateProductValidationSchema,
+  contactValidationSchema,
 };
