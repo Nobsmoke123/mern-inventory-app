@@ -23,11 +23,4 @@ router.patch(
   asyncWrapper(userController.updatePassword)
 );
 
-router.post('/forgot-password', asyncWrapper(userController.forgotPassword));
-
-router.put(
-  '/reset-password/:resetToken',
-  asyncWrapper(userController.resetPassword)
-);
-
 module.exports = router;
